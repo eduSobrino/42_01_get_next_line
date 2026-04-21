@@ -6,7 +6,7 @@
 /*   By: esobrino <esobrino@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 18:02:08 by esobrino          #+#    #+#             */
-/*   Updated: 2026/04/18 21:11:41 by esobrino         ###   ########.fr       */
+/*   Updated: 2026/04/20 19:13:49 by esobrino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ int		trim_stash(char **stash, char *line);
 char	*solve_line(char *stash, int len);
 int		get_len(char *s);
 void	clear_stash(char **stash);
+int		resolve_line_len(int fd, char **stash, ssize_t *line_len);
+char	*solve_and_trim(char **stash, ssize_t line_len);
 
 #endif

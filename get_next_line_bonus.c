@@ -6,14 +6,11 @@
 /*   By: esobrino <esobrino@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 21:13:08 by esobrino          #+#    #+#             */
-/*   Updated: 2026/04/18 21:12:33 by esobrino         ###   ########.fr       */
+/*   Updated: 2026/04/20 19:12:17 by esobrino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-static int	resolve_line_len(int fd, char **stash, ssize_t *line_len);
-static char	*solve_and_trim(char **stash, ssize_t line_len);
 
 char	*get_next_line(int fd)
 {
@@ -52,7 +49,7 @@ void	clear_stash(char **stash)
 	*stash = NULL;
 }
 
-static char	*solve_and_trim(char **stash, ssize_t line_len)
+char	*solve_and_trim(char **stash, ssize_t line_len)
 {
 	char		*line;
 
@@ -71,7 +68,7 @@ static char	*solve_and_trim(char **stash, ssize_t line_len)
 	return (line);
 }
 
-static int	resolve_line_len(int fd, char **stash, ssize_t *line_len)
+int	resolve_line_len(int fd, char **stash, ssize_t *line_len)
 {
 	ssize_t		read_bytes;
 

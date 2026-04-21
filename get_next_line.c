@@ -6,7 +6,7 @@
 /*   By: esobrino <esobrino@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 21:13:08 by esobrino          #+#    #+#             */
-/*   Updated: 2026/04/18 20:29:32 by esobrino         ###   ########.fr       */
+/*   Updated: 2026/04/20 18:01:18 by esobrino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,26 @@ static char	*solve_and_trim(char **stash, ssize_t line_len);
 char	*get_next_line(int fd)
 {
 	static char	*stash;
+	static int	stash_fd = -1;
+	char		*line;
 	ssize_t		line_len;
 	int			status;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-	{
-		clear_stash(&stash);
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	}
+	status = read(fd, 0, 0);
+	if (status < 0 && fd == stash_fd)
+		return ((void)(clear_stash(&stash), stash_fd = -1), NULL);
+	if (status < 0)
+		return (NULL);
+	if (stash && stash_fd != -1 && stash_fd != fd)
+		clear_stash(&stash);
+	stash_fd = fd;
 	status = resolve_line_len(fd, &stash, &line_len);
 	if (status <= 0)
-		return (NULL);
-	return (solve_and_trim(&stash, line_len));
+		return ((void)(!stash && (stash_fd = -1)), NULL);
+	line = solve_and_trim(&stash, line_len);
+	return ((void)(!stash && (stash_fd = -1)), line);
 }
 
 int	get_len(char *s)
