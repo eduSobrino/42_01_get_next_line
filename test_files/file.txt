@@ -1,3 +1,0 @@
-hello from get_next_line
-this is the second line
-and this is the third

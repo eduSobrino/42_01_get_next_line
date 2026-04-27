@@ -1,0 +1,11 @@
+.codex/
+
+*.o
+*.out
+*.a
+
+gnl_test
+gnl_test_bonus
+gnl_test_trigger
+
+vgcore.*

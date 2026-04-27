@@ -6,7 +6,7 @@
 /*   By: esobrino <esobrino@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 21:13:08 by esobrino          #+#    #+#             */
-/*   Updated: 2026/04/20 19:12:17 by esobrino         ###   ########.fr       */
+/*   Updated: 2026/04/27 21:03:29 by esobrino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd >= MAX_FD || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (read(fd, 0, 0) < 0)
-	{
-		clear_stash(&stash[fd]);
-		return (NULL);
-	}
 	status = resolve_line_len(fd, &stash[fd], &line_len);
 	if (status <= 0)
 		return (NULL);
